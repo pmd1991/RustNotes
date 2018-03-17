@@ -50,7 +50,6 @@ attempt at int parameter example:
 
 ```rust
 use std::collections::HashMap;
-use std::collections::hash_map::Entry;
 
 fn memoize<'a, T>(f: T) -> Box<'a + FnMut(i32) -> i32>
 where
@@ -58,10 +57,7 @@ where
 {
     let mut cache = HashMap::new();
 
-    Box::new(move |n| match cache.entry(n) {
-        Entry::Occupied(entry) => { *entry.get() },
-        Entry::Vacant(entry) => { *entry.insert(f(n)) },
-    })
+    Box::new(move |n| *cache.entry(n).or_insert_with(|| f(n)))
 }
 
 fn fake_slow(i: i32) -> i32 {
@@ -76,4 +72,5 @@ fn main() {
     println!("{}", f(4));
     println!("{}", f(2));
 }
+
 ```
