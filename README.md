@@ -46,7 +46,37 @@ fn identity<T>(f : T) -> T { f }
 
 cached crate is available
 
-attempt at int parameter example:
+attempt at function int parameter and return type nightly example:
+
+```rust
+#![feature(conservative_impl_trait)]
+
+use std::collections::HashMap;
+
+fn memoize<T>(f: T) -> impl FnMut(i32) -> i32
+where
+    T: Fn(i32) -> i32,
+{
+    let mut cache = HashMap::new();
+
+    move |n| *cache.entry(n).or_insert_with(|| f(n))
+}
+
+fn fake_slow(i: i32) -> i32 {
+    println!("slow operation");
+    i
+}
+
+fn main() {
+    let mut f = memoize(fake_slow);
+
+    println!("{}", f(4));
+    println!("{}", f(4));
+    println!("{}", f(2));
+}
+```
+
+stable...
 
 ```rust
 use std::collections::HashMap;
