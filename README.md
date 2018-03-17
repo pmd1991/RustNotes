@@ -48,6 +48,7 @@ cached crate is available
 
 attempt at int parameter example:
 
+```rust
 use std::collections::HashMap;
 use std::collections::hash_map::Entry;
 
@@ -75,4 +76,4 @@ fn main() {
     println!("{}", f(4));
     println!("{}", f(2));
 }
-
+```
