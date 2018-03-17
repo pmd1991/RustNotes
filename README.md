@@ -34,4 +34,8 @@ fn main() {
 }
 ```
 
+## identity function (from stack overflow)
+
+fn identity<T>(f : T) -> T { f }
+
 
