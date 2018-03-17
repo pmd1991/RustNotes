@@ -1,5 +1,7 @@
 # Rust Notes
 
+I am a beginner. These are some notes to help me learn Rust. I do not know if the code is any good.
+
 ## How to compose functions in Rust (nightly)
 from https://stackoverflow.com/questions/45786955/how-to-compose-functions-in-rust
 
