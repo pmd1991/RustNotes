@@ -36,6 +36,7 @@ fn main() {
 
 ## identity function (from stack overflow)
 
+```rust
 fn identity<T>(f : T) -> T { f }
-
+```
 
