@@ -1,7 +1,9 @@
-# RustNotes
+# Rust Notes
 
 ## How to compose functions in Rust (nightly)
 from https://stackoverflow.com/questions/45786955/how-to-compose-functions-in-rust
+
+do not know macros currently...
 
 ```rust
 #![feature(conservative_impl_trait)]
@@ -39,4 +41,38 @@ fn main() {
 ```rust
 fn identity<T>(f : T) -> T { f }
 ```
+
+## memoization 
+
+cached crate is available
+
+attempt at int parameter example:
+
+use std::collections::HashMap;
+use std::collections::hash_map::Entry;
+
+fn memoize<'a, T>(f: T) -> Box<'a + FnMut(i32) -> i32>
+where
+    T: 'a + Fn(i32) -> i32,
+{
+    let mut cache = HashMap::new();
+
+    Box::new(move |n| match cache.entry(n) {
+        Entry::Occupied(entry) => { *entry.get() },
+        Entry::Vacant(entry) => { *entry.insert(f(n)) },
+    })
+}
+
+fn fake_slow(i: i32) -> i32 {
+    println!("slow operation");
+    i
+}
+
+fn main() {
+    let mut f = memoize(fake_slow);
+
+    println!("{}", f(4));
+    println!("{}", f(4));
+    println!("{}", f(2));
+}
 
