@@ -106,3 +106,32 @@ fn main() {
 }
 
 ```
+
+## Kleisli exercise
+
+```rust
+fn safe_root(num: f64) -> Result<f64, &'static str> {
+    let result = num.sqrt();
+
+    if result.is_nan() {
+        Err("Square root of negative")
+    } else {
+        Ok(result)
+    }
+}
+
+fn safe_reciprocal(num: f64) -> Result<f64, &'static str> {
+    let result = num.recip();
+    
+    if result.is_infinite() {
+        Err("Reciprocal of 0")
+    } else {
+        Ok(result)
+    }
+}
+
+fn safe_root_reciprocal(num: f64) -> Result<f64, &'static str> {
+    safe_reciprocal(num).and_then(|num| safe_root(num))
+}
+```
+
