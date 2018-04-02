@@ -111,16 +111,20 @@ fn main() {
 
 ```rust
 fn safe_root(num: f64) -> Result<f64, &'static str> {
-    if num >= 0.0 {
-        Ok(num.sqrt())
+    let result = num.sqrt();
+        
+    if result.is_normal() || result == 0.0 {
+        Ok(result)
     } else {
         Err("Error taking square root")
     }
 }
 
 fn safe_reciprocal(num: f64) -> Result<f64, &'static str> {
+    let result = num.recip();
+
     if num.is_normal() {
-        Ok(num.recip())
+        Ok(result)
     } else {
         Err("Reciprocal error")
     }
@@ -131,29 +135,29 @@ fn safe_root_reciprocal(num: f64) -> Result<f64, &'static str> {
 }
 
 fn main() {
-    println!("{:?}", safe_root_reciprocal(4.0));
-    println!("{:?}", safe_root_reciprocal(0.0));
-    println!("{:?}", safe_root_reciprocal(-4.0));
-    println!("{:?}", safe_root_reciprocal(std::f64::INFINITY));
-    println!("{:?}", safe_root_reciprocal(std::f64::NEG_INFINITY));
-    println!("{:?}", safe_root_reciprocal(std::f64::NAN));
-    println!("{:?}", safe_root_reciprocal(std::f64::MIN_POSITIVE));
-    println!("{:?}", safe_root_reciprocal(std::f64::MAX));
-    println!("{:?}", safe_root(std::f64::EPSILON));
-    println!("{:?}", safe_root(std::f64::INFINITY));
-    println!("{:?}", safe_root(std::f64::NEG_INFINITY));
-    println!("{:?}", safe_root(std::f64::NAN));
-    println!("{:?}", safe_root(std::f64::MIN_POSITIVE));
-    println!("{:?}", safe_root(std::f64::MAX));
-    println!("{:?}", safe_root(std::f64::EPSILON));
-    println!("{:?}", safe_reciprocal(std::f64::INFINITY));
-    println!("{:?}", safe_reciprocal(std::f64::NEG_INFINITY));
-    println!("{:?}", safe_reciprocal(std::f64::NAN));
-    println!("{:?}", safe_reciprocal(std::f64::MIN_POSITIVE));
-    println!("{:?}", safe_reciprocal(std::f64::MAX));
-    println!("{:?}", safe_reciprocal(std::f64::EPSILON));
+    println!("1. compose 4 {:?}", safe_root_reciprocal(4.0));
+    println!("2. compose 0 {:?}", safe_root_reciprocal(0.0));
+    println!("3. compose -4 {:?}", safe_root_reciprocal(-4.0));
+    println!("4. compose inf {:?}", safe_root_reciprocal(std::f64::INFINITY));
+    println!("5. compose neg inf {:?}", safe_root_reciprocal(std::f64::NEG_INFINITY));
+    println!("6. compose nan {:?}", safe_root_reciprocal(std::f64::NAN));
+    println!("7. compose min positive: {:?}", safe_root_reciprocal(std::f64::MIN_POSITIVE));
+    println!("8. compose max: {:?}", safe_root_reciprocal(std::f64::MAX));
+    println!("1a. root epsilon: {:?}", safe_root(std::f64::EPSILON));
+    println!("2a. root inf {:?}", safe_root(std::f64::INFINITY));
+    println!("3a. root neg inf {:?}", safe_root(std::f64::NEG_INFINITY));
+    println!("4a. root nan {:?}", safe_root(std::f64::NAN));
+    println!("5a. root min positive: {:?}", safe_root(std::f64::MIN_POSITIVE));
+    println!("6a. root max: {:?}", safe_root(std::f64::MAX));
+    println!("7a. root epsilon: {:?}", safe_root(std::f64::EPSILON));
+    println!("8a. root zero {:?}", safe_root(0.0));
+    println!("1b. reciprocal inf {:?}", safe_reciprocal(std::f64::INFINITY));
+    println!("2b. reciprocal neg inf {:?}", safe_reciprocal(std::f64::NEG_INFINITY));
+    println!("3b. reciprocal nan {:?}", safe_reciprocal(std::f64::NAN));
+    println!("4b. reciprocal min positive: {:?}", safe_reciprocal(std::f64::MIN_POSITIVE));
+    println!("5b. reciprocal max: {:?}", safe_reciprocal(std::f64::MAX));
+    println!("6b. reciprocal epsilon: {:?}", safe_reciprocal(std::f64::EPSILON));
+    println!("7b. reciprocal 0 {:?}", safe_reciprocal(0.0));
 }
-
-
 ```
 
