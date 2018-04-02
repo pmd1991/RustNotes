@@ -123,7 +123,7 @@ fn safe_root(num: f64) -> Result<f64, &'static str> {
 fn safe_reciprocal(num: f64) -> Result<f64, &'static str> {
     let result = num.recip();
 
-    if num.is_normal() {
+    if result.is_normal() {
         Ok(result)
     } else {
         Err("Reciprocal error")
