@@ -109,6 +109,8 @@ fn main() {
 
 ## Kleisli exercise
 
+For more information, it looks like there is a crate with a Kleisli struct.
+
 ```rust
 fn safe_root(num: f64) -> Result<f64, &'static str> {
     let result = num.sqrt();
