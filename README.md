@@ -133,5 +133,13 @@ fn safe_reciprocal(num: f64) -> Result<f64, &'static str> {
 fn safe_root_reciprocal(num: f64) -> Result<f64, &'static str> {
     safe_reciprocal(num).and_then(|num| safe_root(num))
 }
+
+fn main() {
+    println!("{:?}", safe_root_reciprocal(0.0));
+    println!("{:?}", safe_root_reciprocal(-4.0));
+    println!("{:?}", safe_root_reciprocal(4.0));
+}
+
+
 ```
 
