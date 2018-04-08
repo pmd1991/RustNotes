@@ -109,7 +109,7 @@ fn main() {
 
 ## Kleisli exercise
 
-For more information, it looks like there is a crate with a Kleisli struct.
+For more information, it looks like there is a crate with a Kleisli struct in plumbum crate.
 
 ```rust
 fn safe_root(num: f64) -> (f64, &'static str) {
