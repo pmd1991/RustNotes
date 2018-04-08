@@ -112,28 +112,31 @@ fn main() {
 For more information, it looks like there is a crate with a Kleisli struct.
 
 ```rust
-fn safe_root(num: f64) -> Result<f64, &'static str> {
-    let result = num.sqrt();
-        
-    if result.is_normal() || result == 0.0 {
-        Ok(result)
+fn safe_root(num: f64) -> (f64, &'static str) {
+    let num = num.sqrt();
+    
+    if num.is_normal() {
+        (num, "")
     } else {
-        Err("Error taking square root")
+        (std::f64::NAN, "Error taking square root. ")
     }
 }
 
-fn safe_reciprocal(num: f64) -> Result<f64, &'static str> {
-    let result = num.recip();
-
-    if result.is_normal() {
-        Ok(result)
+fn safe_reciprocal(num: f64) -> (f64, &'static str) {
+    let num = num.recip();
+    
+    if num.is_normal() {
+        (num, "")
     } else {
-        Err("Reciprocal error")
+        (std::f64::NAN, "Reciprocal error. ")
     }
 }
 
-fn safe_root_reciprocal(num: f64) -> Result<f64, &'static str> {
-    safe_reciprocal(num).and_then(|num| safe_root(num))
+fn safe_root_reciprocal(num: f64) -> (f64, String) {
+    let result1 = safe_reciprocal(num);
+    let result2 = safe_root(result1.0);
+
+    (result2.0, format!("{}{}", result1.1, result2.1))
 }
 
 fn main() {
