@@ -115,7 +115,7 @@ For more information, it looks like there is a crate with a Kleisli struct.
 fn safe_root(num: f64) -> (f64, &'static str) {
     let num = num.sqrt();
     
-    if num.is_normal() {
+    if num.is_finite() {
         (num, "")
     } else {
         (std::f64::NAN, "Error taking square root. ")
@@ -125,7 +125,7 @@ fn safe_root(num: f64) -> (f64, &'static str) {
 fn safe_reciprocal(num: f64) -> (f64, &'static str) {
     let num = num.recip();
     
-    if num.is_normal() {
+    if num.is_finite() {
         (num, "")
     } else {
         (std::f64::NAN, "Reciprocal error. ")
