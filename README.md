@@ -166,3 +166,30 @@ fn main() {
 }
 ```
 
+Coproduct exercise
+
+```rust
+enum Either {
+    Left(i32),
+    Right(bool)
+}
+
+fn i(n : i32) -> i32 { return n; }
+fn j(b : bool) -> i32 { return if b { 0 } else { 1 } }
+
+fn m(e : Either) -> i32 {
+    match e {
+        Either::Left(n) => n,
+        Either::Right(b) => if b { 0 } else { 1 }
+    }
+}
+
+fn main() {
+    let either_left = Either::Left(4);
+    let either_right = Either::Right(false);
+
+    println!("{} = {}", m(either_left), i(4));
+    println!("{} = {}", m(either_right), j(false));
+}
+
+```
