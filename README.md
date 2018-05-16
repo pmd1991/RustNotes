@@ -171,16 +171,24 @@ Coproduct exercise
 ```rust
 enum Either {
     Left(i32),
-    Right(bool)
+    Right(bool),
 }
 
-fn i(n : i32) -> i32 { return n; }
-fn j(b : bool) -> i32 { return if b { 0 } else { 1 } }
+fn i(n: i32) -> i32 {
+    return n;
+}
+fn j(b: bool) -> i32 {
+    return if b { 0 } else { 1 };
+}
 
-fn m(e : Either) -> i32 {
+fn m(e: Either) -> i32 {
     match e {
         Either::Left(n) => n,
-        Either::Right(b) => if b { 0 } else { 1 }
+        Either::Right(b) => if b {
+            0
+        } else {
+            1
+        },
     }
 }
 
@@ -191,5 +199,4 @@ fn main() {
     println!("{} = {}", m(either_left), i(4));
     println!("{} = {}", m(either_right), j(false));
 }
-
 ```
